@@ -12,12 +12,14 @@ class AppolodoroUploadImage extends Component {
   onClickUpload = () => {
     this.inputFile.click()
   }
-
+  
   setRef = (element) => {
     this.inputFile = element
-    this.inputFile.onchange = (e) => {
-      const loadingImage = loadImage(
-        e.target.files[0],
+  }
+
+  handleChange = (event) => {
+    const loadingImage = loadImage(
+        event.target.files[0],
         (image, meta) => {
           this.onUpload(image)
         },
@@ -29,7 +31,6 @@ class AppolodoroUploadImage extends Component {
           orientation : true
         }        
       )
-    }        
   }
 
   onUpload = (image) =>{
@@ -40,7 +41,7 @@ class AppolodoroUploadImage extends Component {
 
   render() {
     return <div>
-      <input type="file" ref={ this.setRef } style={{display:'none'}} />
+      <input type="file" ref={ this.setRef } style={{display:'none'}} onChange = { this.handleChange } />
       <button onClick={ this.onClickUpload } >Upload</button>
     </div>
   }
