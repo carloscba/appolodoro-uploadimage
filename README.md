@@ -13,7 +13,7 @@
 [coveralls-badge]: https://img.shields.io/coveralls/user/repo/master.png?style=flat-square
 [coveralls]: https://coveralls.io/github/user/repo
 
-'''js
+```js
 
 import React, {Component} from 'react'
 import {render} from 'react-dom'
@@ -40,4 +40,4 @@ class Demo extends Component {
 
 render(<Demo/>, document.querySelector('#demo'))
 
-'''
+```
