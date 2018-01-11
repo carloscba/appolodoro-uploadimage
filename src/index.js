@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import loadImage from 'blueimp-load-image'
 import PropTypes from 'prop-types';
-import css from './style.css'
 
 class AppolodoroUploadImage extends Component {  
 
