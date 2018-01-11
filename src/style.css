@@ -1,0 +1,11 @@
+.UploadImage{
+
+}
+.UploadImage__button{
+    display: inline-block;
+    border: 1px solid #000000;
+    padding: 10px;
+    background-color: #C3C3C3;
+    color: white;
+    cursor: pointer;
+}

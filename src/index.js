@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import loadImage from 'blueimp-load-image'
 import PropTypes from 'prop-types';
+import css from './style.css'
 
 class AppolodoroUploadImage extends Component {  
 
@@ -40,17 +41,36 @@ class AppolodoroUploadImage extends Component {
   }
 
   render() {
-    return <div>
+    return <div className='UploadImage'>
       <input type="file" ref={ this.setRef } style={{display:'none'}} onChange = { this.handleChange } />
-      <button onClick={ this.onClickUpload } >Upload</button>
+      <div className='UploadImage__button' onClick={ this.onClickUpload } >Upload</div>
     </div>
   }
 
 }
-
+/*
+const styles = {
+  container : {
+    display : 'inline-block'
+  },
+  button : {
+    display: 'inline-block',
+    border: '1px solid #000000',
+    padding: '10px',
+    backgroundColor: '#C3C3C3',
+    color: 'white',
+    cursor: 'pointer'
+  }
+}
+*/
 AppolodoroUploadImage.propTypes = {
   onUpload : PropTypes.func,
   onError : PropTypes.func,
 }
+
+AppolodoroUploadImage.defaultProps = {
+  //styles
+}
+
 
 export default AppolodoroUploadImage;
