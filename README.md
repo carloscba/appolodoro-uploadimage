@@ -22,8 +22,8 @@ import AppolodoroUploadImage from '../../src'
 
 class Demo extends Component {
   
-  handleUpload = (blob) => {
-    this.image.src = URL.createObjectURL(blob)
+  handleUpload = (imageData) => {
+    this.image.src = imageData
   }
 
   setRef = (element) => {

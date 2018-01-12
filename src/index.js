@@ -6,7 +6,6 @@ class AppolodoroUploadImage extends Component {
 
   constructor(props){
     super(props)
-    console.log(loadImage)
   }
 
   onClickUpload = () => {
@@ -33,10 +32,8 @@ class AppolodoroUploadImage extends Component {
       )
   }
 
-  onUpload = (image) =>{
-    image.toBlob( (blob) => {
-      this.props.onUpload(blob)
-    })
+  onUpload = (canvas) =>{
+    this.props.onUpload(canvas.toDataURL("image/jpeg", 1))
   }
 
   render() {
