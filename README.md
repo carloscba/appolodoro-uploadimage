@@ -30,9 +30,23 @@ class Demo extends Component {
     this.image = element
   }
 
+  setUploader = (element) => {
+    this.uploader = element
+  }
+
+  openFile = () => {
+    this.uploader.click()
+  }
+
   render() {
     return <div>
-      <AppolodoroUploadImage onUpload = { this.handleUpload }/>
+      <button 
+      onClick={ this.openFile }>Open file</button>
+      <hr/>
+      <AppolodoroUploadImage 
+      onUpload = { this.handleUpload } 
+      setRef={ this.setUploader }
+      />
       <img ref={ this.setRef } />
     </div>
   }
