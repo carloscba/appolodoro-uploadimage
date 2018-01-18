@@ -5,8 +5,27 @@ import AppolodoroUploadImage from '../../src'
 
 class Demo extends Component {
   
-  handleUpload = (imageData) => {
+  constructor(props){
+    super(props)
+    this.state = {
+      width : 0,
+      height : 0,
+      top: 0,
+      left: 0
+    }
+  }
+
+  handleUpload = (imageData, cropData) => {
     this.image.src = imageData
+    if(cropData){
+      this.setState({
+        width : cropData.topCrop.width,
+        height : cropData.topCrop.height,
+        top : cropData.topCrop.x,
+        left : cropData.topCrop.y
+      })
+    }
+    console.log('cropData', cropData)
   }
 
   setRef = (element) => {
@@ -29,8 +48,20 @@ class Demo extends Component {
       <AppolodoroUploadImage 
       onUpload = { this.handleUpload } 
       setRef={ this.setUploader }
+      smartcrop
+      size = { [600,315] }
       />
-      <img ref={ this.setRef } />
+      <div style={ { position : 'absolute' }}>
+        <div style={ {
+          position: 'absolute',
+          border: '1px solid #000000',
+          width: this.state.width,
+          height: this.state.height,
+          top: this.state.top,
+          left: this.state.left
+        }}></div>
+        <img ref={ this.setRef } />
+      </div>
     </div>
   }
 }

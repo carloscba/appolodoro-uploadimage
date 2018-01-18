@@ -19,16 +19,17 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
-    "blueimp-load-image": "^2.17.1",
-    "prop-types": "^15.6.0"
+    "blueimp-load-image": "2.17.1",
+    "prop-types": "15.6.0",
+    "smartcrop": "1.1.1"
   },
   "peerDependencies": {
     "react": "16.x"
   },
   "devDependencies": {
     "nwb": "0.21.x",
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react": "16.2.0",
+    "react-dom": "16.2.0"
   },
   "author": "carloscba",
   "license": "MIT",

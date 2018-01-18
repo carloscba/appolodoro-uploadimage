@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import loadImage from 'blueimp-load-image'
 import PropTypes from 'prop-types';
+import smartcrop from 'smartcrop'
 
 class AppolodoroUploadImage extends Component {  
 
@@ -24,8 +25,8 @@ class AppolodoroUploadImage extends Component {
           this.onUpload(image)
         },
         {
-          maxWidth: 640,
-          minWidth: 480,
+          maxWidth: this.props.size[0],
+          maxHeight: this.props.size[1],
           meta : true,
           canvas: true,
           orientation : true
@@ -34,7 +35,15 @@ class AppolodoroUploadImage extends Component {
   }
 
   onUpload = (canvas) =>{
-    this.props.onUpload(canvas.toDataURL("image/jpeg", 1))
+    const image = canvas.toDataURL("image/jpeg", 1)
+
+    if(this.props.smartcrop){
+      smartcrop.crop(canvas).then((result) => {
+        this.props.onUpload(image, result)
+      });
+    }else{
+      this.props.onUpload(image, null)
+    }    
   }
 
   render() {
@@ -45,29 +54,17 @@ class AppolodoroUploadImage extends Component {
   }
 
 }
-/*
-const styles = {
-  container : {
-    display : 'inline-block'
-  },
-  button : {
-    display: 'inline-block',
-    border: '1px solid #000000',
-    padding: '10px',
-    backgroundColor: '#C3C3C3',
-    color: 'white',
-    cursor: 'pointer'
-  }
-}
-*/
+
 AppolodoroUploadImage.propTypes = {
   onUpload : PropTypes.func,
   onError : PropTypes.func,
   setRef: PropTypes.func,
+  smartcrop: PropTypes.bool,
+  size: PropTypes.array.isRequired
 }
 
 AppolodoroUploadImage.defaultProps = {
-  //styles
+  smartcrop : false
 }
 
 
