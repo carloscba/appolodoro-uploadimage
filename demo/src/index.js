@@ -48,7 +48,6 @@ class Demo extends Component {
       <AppolodoroUploadImage 
       onUpload = { this.handleUpload } 
       setRef={ this.setUploader }
-      smartcrop
       size = { [600,315] }
       />
       <div style={ { position : 'absolute' }}>

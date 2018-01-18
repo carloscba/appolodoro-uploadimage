@@ -26,7 +26,7 @@ class AppolodoroUploadImage extends Component {
         },
         {
           maxWidth: this.props.size[0],
-          maxHeight: this.props.size[1],
+          minHeight: this.props.size[1],
           meta : true,
           canvas: true,
           orientation : true
