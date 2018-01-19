@@ -48,7 +48,7 @@ class AppolodoroUploadImage extends Component {
 
   render() {
     return <div className='UploadImage'>
-      <input type="file" ref={ this.setRef } style={{display:'none'}} onChange = { this.handleChange } />
+      <input type="file" accept={ this.props.accept } ref={ this.setRef } style={{display:'none'}} onChange = { this.handleChange } />
       <div className='UploadImage__button' onClick={ this.onClickUpload } >Upload</div>
     </div>
   }
@@ -60,11 +60,13 @@ AppolodoroUploadImage.propTypes = {
   onError : PropTypes.func,
   setRef: PropTypes.func,
   smartcrop: PropTypes.bool,
-  size: PropTypes.array.isRequired
+  size: PropTypes.array.isRequired,
+  accept : PropTypes.string
 }
 
 AppolodoroUploadImage.defaultProps = {
-  smartcrop : false
+  smartcrop : false,
+  accept : 'image/*'
 }
 
 
