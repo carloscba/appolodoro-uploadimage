@@ -15,7 +15,7 @@ class AppolodoroUploadImage extends Component {
   
   setRef = (element) => {
     this.inputFile = element
-    this.props.setRef(this.inputFile)
+    this.props.setUploader(this.inputFile)
   }
 
   handleChange = (event) => {
@@ -58,7 +58,7 @@ class AppolodoroUploadImage extends Component {
 AppolodoroUploadImage.propTypes = {
   onUpload : PropTypes.func,
   onError : PropTypes.func,
-  setRef: PropTypes.func,
+  setUploader: PropTypes.func,
   smartcrop: PropTypes.bool,
   size: PropTypes.array.isRequired,
   accept : PropTypes.string

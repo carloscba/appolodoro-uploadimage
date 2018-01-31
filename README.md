@@ -22,15 +22,19 @@ import AppolodoroUploadImage from '../../src'
 
 class Demo extends Component {
   
-  handleUpload = (imageData) => {
-    this.image.src = imageData
+  constructor(props){
+    super(props)
+  }
+
+  handleUpload = (imageData, cropData) => {
+    this.refs.image.src = imageData
   }
 
   setRef = (element) => {
     this.image = element
   }
 
-  setUploader = (element) => {
+  handleSetUploader = (element) => {
     this.uploader = element
   }
 
@@ -44,14 +48,17 @@ class Demo extends Component {
       onClick={ this.openFile }>Open file</button>
       <hr/>
       <AppolodoroUploadImage 
-      onUpload = { this.handleUpload } 
-      setRef={ this.setUploader }
+        onUpload = { this.handleUpload } 
+        setUploader ={ this.handleSetUploader }
+        size = { [600,315] }
       />
-      <img ref={ this.setRef } />
+      <hr/>
+      <img ref="image" />
     </div>
   }
 }
 
 render(<Demo/>, document.querySelector('#demo'))
+
 
 ```
