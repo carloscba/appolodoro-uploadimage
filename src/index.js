@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import loadImage from 'blueimp-load-image'
 import PropTypes from 'prop-types';
 import smartcrop from 'smartcrop'
+import axios from 'axios'
 
 class AppolodoroUploadImage extends Component {  
 
@@ -38,18 +39,93 @@ class AppolodoroUploadImage extends Component {
     const image = canvas.toDataURL("image/jpeg", 1)
 
     if(this.props.smartcrop){
-      smartcrop.crop(canvas).then((result) => {
-        this.props.onUpload(image, result)
-      });
+      this.requestVision(canvas, image)
+      //this.smartcrop(canvas)
     }else{
       this.props.onUpload(image, null)
     }    
+  }
+
+  requestVision = (canvas, image) => {
+    const requestData = {
+      "requests": [
+          {
+          "image": {
+              "content" : `${image.split(',')[1]}`
+          },
+          "features": [
+              {
+              "type": "CROP_HINTS",
+              }
+          ],
+          "imageContext": {
+              "cropHintsParams": {
+                  "aspectRatios": [1]
+              }
+          }
+          }
+      ]
+    }
+      
+    axios.post(
+        `https://vision.googleapis.com/v1/images:annotate?key=XXX`,
+        requestData
+    ).then( (response) => {
+      this.smartcrop(canvas,response)
+    }).catch( (error) => {
+      console.log(error)
+    });               
+
+  }
+
+  smartcrop = (canvas, visionResponse) => {
+    const HORIZONTAL = 'horizontal'
+    const VERTICAL = 'vertical'
+    
+    const visionData = visionResponse.data.responses
+    const vertices = visionData[0].cropHintsAnnotation.cropHints[0].boundingPoly.vertices    
+
+    let direction = null
+    if(vertices[0].x){
+        direction = HORIZONTAL
+    }
+    if(vertices[0].y){
+        direction = VERTICAL
+    }          
+    
+    const cropSource = canvas.getContext('2d');
+    let cropData;
+
+    switch(direction){
+      case HORIZONTAL:
+          cropData = cropSource.getImageData(vertices[0].x, 0, (vertices[1].x - vertices[0].x), vertices[2].y)
+          //crop.sourceRect = new window.createjs.Rectangle(vertices[0].x, 0, (vertices[1].x - vertices[0].x), vertices[2].y);
+      break
+      case VERTICAL:
+          cropData = cropSource.getImageData(0, vertices[0].y, vertices[1].x, (vertices[3].y - vertices[0].y))
+          //crop.sourceRect = new window.createjs.Rectangle(0, vertices[0].y, vertices[1].x, (vertices[3].y - vertices[0].y));
+      break         
+      default:       
+          //crop.sourceRect = new window.createjs.Rectangle(0, 0, options.size.width, options.size.height);
+      break
+    }    
+
+    const canvasResult = this.refs.canvasResult
+    canvasResult.width = cropData.width
+    canvasResult.height = cropData.height    
+    
+    const cropResult = canvasResult.getContext("2d");
+    cropResult.putImageData(cropData, 0, 0);
+    
+    this.props.onUpload(cropResult.canvas.toDataURL("image/jpeg", 1), null)
+
   }
 
   render() {
     return <div className='UploadImage'>
       <input type="file" accept={ this.props.accept } ref={ this.setRef } style={{display:'none'}} onChange = { this.handleChange } />
       <div className='UploadImage__button' onClick={ this.onClickUpload } >Upload</div>
+      <canvas ref="canvasResult"></canvas>
     </div>
   }
 

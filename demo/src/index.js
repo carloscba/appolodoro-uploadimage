@@ -34,6 +34,7 @@ class Demo extends Component {
         onUpload = { this.handleUpload } 
         setUploader ={ this.handleSetUploader }
         size = { [600,315] }
+        smartcrop
       />
       <hr/>
       <img ref="image" />
