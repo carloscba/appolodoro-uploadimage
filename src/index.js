@@ -60,7 +60,7 @@ class AppolodoroUploadImage extends Component {
           ],
           "imageContext": {
               "cropHintsParams": {
-                  "aspectRatios": [1]
+                  "aspectRatios": [1.9]
               }
           }
           }
@@ -68,7 +68,7 @@ class AppolodoroUploadImage extends Component {
     }
       
     axios.post(
-        `https://vision.googleapis.com/v1/images:annotate?key=XXX`,
+        `https://vision.googleapis.com/v1/images:annotate?key=xxx`,
         requestData
     ).then( (response) => {
       this.smartcrop(canvas,response)
