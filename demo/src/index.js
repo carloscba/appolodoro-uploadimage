@@ -9,7 +9,7 @@ class Demo extends Component {
     super(props)
   }
 
-  handleUpload = (imageData, cropData) => {
+  handleUpload = (imageData, visionData) => {
     this.refs.image.src = imageData
   }
 
@@ -34,7 +34,9 @@ class Demo extends Component {
         onUpload = { this.handleUpload } 
         setUploader ={ this.handleSetUploader }
         size = { [600,315] }
+        vision_key = 'XXX'
         smartcrop
+        
       />
       <hr/>
       <img ref="image" />
