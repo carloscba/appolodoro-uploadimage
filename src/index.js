@@ -67,8 +67,6 @@ class AppolodoroUploadImage extends Component {
       ]
     }
 
-console.log(`https://vision.googleapis.com/v1/images:annotate?key=${this.props.vision_key}`)
-
     axios.post(
       `https://vision.googleapis.com/v1/images:annotate?key=${this.props.vision_key}`,
       requestData
@@ -97,8 +95,6 @@ console.log(`https://vision.googleapis.com/v1/images:annotate?key=${this.props.v
 
     const cropSource = canvas.getContext('2d');
     let cropData;
-
-    console.log(vertices)
 
     switch (direction) {
       case HORIZONTAL:
