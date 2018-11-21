@@ -33,8 +33,8 @@ class Demo extends Component {
       <AppolodoroUploadImage 
         onUpload = { this.handleUpload } 
         setUploader ={ this.handleSetUploader }
-        size = { [600,315] }
-        vision_key = 'XXX'
+        size = { [300,300] }
+        vision_key = 'xxx'
         smartcrop
         
       />

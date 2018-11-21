@@ -60,12 +60,14 @@ class AppolodoroUploadImage extends Component {
           ],
           "imageContext": {
             "cropHintsParams": {
-              "aspectRatios": [1.9]
+              "aspectRatios": [(this.props.size[0] / this.props.size[1])]
             }
           }
         }
       ]
     }
+
+console.log(`https://vision.googleapis.com/v1/images:annotate?key=${this.props.vision_key}`)
 
     axios.post(
       `https://vision.googleapis.com/v1/images:annotate?key=${this.props.vision_key}`,
@@ -96,6 +98,8 @@ class AppolodoroUploadImage extends Component {
     const cropSource = canvas.getContext('2d');
     let cropData;
 
+    console.log(vertices)
+
     switch (direction) {
       case HORIZONTAL:
         cropData = cropSource.getImageData(vertices[0].x, 0, (vertices[1].x - vertices[0].x), vertices[2].y)
@@ -104,11 +108,9 @@ class AppolodoroUploadImage extends Component {
         cropData = cropSource.getImageData(0, vertices[0].y, vertices[1].x, (vertices[3].y - vertices[0].y))
         break
       default:
-        //crop.sourceRect = new window.createjs.Rectangle(0, 0, options.size.width, options.size.height);
+        cropData = cropSource.getImageData(0, 0, vertices[2].x, vertices[2].y)
         break
     }
-
-    console.log(cropData)
 
     const canvasResult = this.refs.canvasResult
     canvasResult.width = cropData.width
