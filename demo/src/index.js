@@ -9,7 +9,7 @@ class Demo extends Component {
     super(props)
   }
 
-  handleUpload = (imageData, cropData) => {
+  handleUpload = (imageData, visionData) => {
     this.refs.image.src = imageData
   }
 
@@ -33,7 +33,10 @@ class Demo extends Component {
       <AppolodoroUploadImage 
         onUpload = { this.handleUpload } 
         setUploader ={ this.handleSetUploader }
-        size = { [600,315] }
+        size = { [300,300] }
+        vision_key = 'xxx'
+        smartcrop
+        
       />
       <hr/>
       <img ref="image" />

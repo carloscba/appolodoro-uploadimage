@@ -1,6 +1,6 @@
 {
   "name": "appolodoro-uploadimage",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "appolodoro-uploadimage React component",
   "main": "lib/index.js",
   "module": "es/index.js",
@@ -19,6 +19,7 @@
     "test:watch": "nwb test-react --server"
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "blueimp-load-image": "2.17.1",
     "prop-types": "15.6.0",
     "smartcrop": "1.1.1"
